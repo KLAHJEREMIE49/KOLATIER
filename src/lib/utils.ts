@@ -2,12 +2,17 @@
 export function formatPrix(valeur: number | string | { toString(): string }): string {
   // Accepte les Decimal Prisma (qui exposent toString) autant que les number
   const n = typeof valeur === 'number' ? valeur : Number(valeur.toString());
-  return new Intl.NumberFormat('fr-CI', {
-    style: 'currency',
-    currency: 'XOF',
-    maximumFractionDigits: 0,
-  }).format(n);
+  // Formatage manuel : Intl varie entre Node et les navigateurs (espaces, symbole), ce qui casse l'hydratation.
+  const arrondi = Math.round(Number.isFinite(n) ? n : 0);
+  const signe = arrondi < 0 ? '-' : '';
+  const milliers = String(Math.abs(arrondi)).replace(/\B(?=(\d{3})+(?!\d))/g, '\u00a0');
+  return `${signe}${milliers}\u00a0FCFA`;
 }
+
+const MOIS = [
+  'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+  'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',
+];
 
 /** Règle métier livraison : offerte dès 50 000 FCFA, sinon 2 000 FCFA. */
 export const SEUIL_LIVRAISON_OFFERTE = 50000;
@@ -25,11 +30,10 @@ export function fraisLivraison(sousTotal: number): number {
 }
 
 export function formatDate(date: Date | string): string {
-  return new Intl.DateTimeFormat('fr-FR', {
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-  }).format(new Date(date));
+  // Heure d'Abidjan = UTC : même résultat sur le serveur et dans tout navigateur.
+  const d = new Date(date);
+  if (Number.isNaN(d.getTime())) return '';
+  return `${String(d.getUTCDate()).padStart(2, '0')} ${MOIS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
 /** Slugifie un libellé : "Chaussures de sport" -> "chaussures-de-sport". */

@@ -62,7 +62,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10 py-4 text-center text-xs text-marque-100/60">
+      <div className="border-t border-white/10 py-4 text-center text-xs text-marque-100/60" suppressHydrationWarning>
         © {new Date().getFullYear()} Kolatier — Projet de Génie Logiciel · Fait avec fierté en Côte d’Ivoire 🇨🇮
       </div>
     </footer>
