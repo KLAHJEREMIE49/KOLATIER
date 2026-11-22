@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#fbf6ee"/><circle cx="320" cy="230" r="150" fill="#fff" stroke="#009e60" stroke-width="12"/>
+  <path d="M250 160h140v42l24 25v126H226V227l24-25z" fill="#cb4b1f" stroke="#3b2a1e" stroke-width="8"/>
+  <path d="M270 125h100v38H270z" fill="#3b2a1e"/><path d="M240 265h160v54H240z" fill="#f7cf4a"/>
+  <text x="320" y="300" text-anchor="middle" font-family="sans-serif" font-size="23" fill="#3b2a1e">PALMISTE</text>
+  <text x="320" y="405" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#3b2a1e">Huile rouge</text>
+</svg>

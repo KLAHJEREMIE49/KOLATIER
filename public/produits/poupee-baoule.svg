@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#fbf6ee"/><path d="M0 390h640v90H0z" fill="#f77f00"/>
+  <circle cx="320" cy="150" r="48" fill="#8e5638" stroke="#3b2a1e" stroke-width="8"/>
+  <path d="M260 205h120l35 140H225z" fill="#009e60" stroke="#3b2a1e" stroke-width="8"/>
+  <path d="M270 220l50 60 50-60m-50 60v64" fill="none" stroke="#f2d879" stroke-width="10"/>
+  <circle cx="300" cy="150" r="5" fill="#3b2a1e"/><circle cx="340" cy="150" r="5" fill="#3b2a1e"/>
+  <text x="320" y="405" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#3b2a1e">Poupée baoulé</text>
+</svg>

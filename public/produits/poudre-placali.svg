@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#fbf6ee"/><path d="M0 390h640v90H0z" fill="#f77f00"/>
+  <path d="M220 170h200l-20 190H240z" fill="#f4e2bc" stroke="#3b2a1e" stroke-width="8"/>
+  <path d="M240 230h160m-165 45h170m-175 45h180" stroke="#e0c17c" stroke-width="12"/>
+  <path d="M240 170c0-25 160-25 160 0" fill="#009e60" stroke="#3b2a1e" stroke-width="8"/>
+  <text x="320" y="420" text-anchor="middle" font-family="sans-serif" font-size="29" fill="#3b2a1e">Farine de placali</text>
+</svg>

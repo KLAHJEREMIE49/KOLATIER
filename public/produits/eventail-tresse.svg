@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#fbf6ee"/><path d="M0 390h640v90H0z" fill="#009e60"/>
+  <path d="M320 310L170 155a210 210 0 0 1 300 0z" fill="#d5a35e" stroke="#704c2a" stroke-width="9"/>
+  <path d="M320 310l-95-192m95 192V90m0 220 0-220m0 220 95-192m-190 42h190m-160 45h130" fill="none" stroke="#f4dfb1" stroke-width="9"/>
+  <path d="M320 300v85" stroke="#3b2a1e" stroke-width="18" stroke-linecap="round"/>
+  <text x="320" y="425" text-anchor="middle" font-family="sans-serif" font-size="29" fill="#3b2a1e">Éventail tressé</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#fbf6ee"/><path d="M0 390h640v90H0z" fill="#009e60"/>
+  <path d="M255 280c-50-30-65-100-15-115 35-10 45 30 55 48 7-64 70-76 84-37 12 35-10 55-32 73 66-15 91 35 55 66-30 27-66 6-89-8-17 55-77 60-91 22-12-31 13-48 33-49z" fill="#c8873a" stroke="#74471e" stroke-width="10"/>
+  <path d="M300 190l10-65m62 78 46-48m-115 58-54-42m71 115 51 35" stroke="#74471e" stroke-width="10" stroke-linecap="round"/>
+  <text x="320" y="370" text-anchor="middle" font-family="sans-serif" font-size="30" fill="#3b2a1e">Gingembre de Man</text>
+</svg>

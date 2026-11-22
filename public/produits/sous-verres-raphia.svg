@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#fbf6ee"/><path d="M0 390h640v90H0z" fill="#009e60"/>
+  <g fill="#c58b45" stroke="#734c28" stroke-width="7"><circle cx="250" cy="215" r="67"/><circle cx="390" cy="215" r="67"/><circle cx="250" cy="330" r="67"/><circle cx="390" cy="330" r="67"/></g>
+  <g fill="none" stroke="#f4d89b" stroke-width="7"><circle cx="250" cy="215" r="46"/><circle cx="390" cy="215" r="46"/><circle cx="250" cy="330" r="46"/><circle cx="390" cy="330" r="46"/></g>
+  <text x="320" y="95" text-anchor="middle" font-family="sans-serif" font-size="29" fill="#3b2a1e">Raphia tressé</text>
+</svg>

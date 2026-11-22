@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#fbf6ee"/><path d="M0 390h640v90H0z" fill="#009e60"/>
+  <path d="M220 170h200l-25 190H245z" fill="#d4aa69" stroke="#3b2a1e" stroke-width="8"/>
+  <path d="M235 170c0-34 170-34 170 0" fill="#f77f00" stroke="#3b2a1e" stroke-width="8"/>
+  <g fill="#8b6034"><circle cx="275" cy="245" r="15"/><circle cx="320" cy="270" r="16"/><circle cx="360" cy="235" r="13"/><circle cx="290" cy="315" r="13"/><circle cx="355" cy="315" r="16"/></g>
+  <text x="320" y="420" text-anchor="middle" font-family="sans-serif" font-size="29" fill="#3b2a1e">Poudre d’akpi</text>
+</svg>

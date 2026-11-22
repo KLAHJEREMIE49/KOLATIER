@@ -1,0 +1,235 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --fond: #fbf6ee;
+  --police-titre: Georgia, 'Times New Roman', serif;
+  --police-texte: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background: var(--fond);
+  color: #3b2a1e;
+  font-family: var(--police-texte);
+  -webkit-font-smoothing: antialiased;
+}
+
+.titre {
+  font-family: var(--police-titre);
+  letter-spacing: -0.015em;
+}
+
+@layer components {
+  .conteneur {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  .bouton {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-marque-400 focus-visible:ring-offset-2
+           disabled:cursor-not-allowed disabled:opacity-60;
+  }
+  .bouton-primaire {
+    @apply bouton bg-gradient-to-b from-marque-500 to-marque-600 text-white shadow-sm hover:from-marque-600 hover:to-marque-700;
+  }
+  .bouton-secondaire {
+    @apply bouton bg-white text-terre ring-1 ring-marque-100 hover:bg-marque-50;
+  }
+  .bouton-danger {
+    @apply bouton bg-rose-50 text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100;
+  }
+  .champ {
+    @apply w-full rounded-xl border-0 bg-white px-3.5 py-2.5 text-sm text-terre ring-1 ring-marque-100
+           placeholder:text-slate-400 focus:ring-2 focus:ring-marque-500;
+  }
+  .etiquette {
+    @apply mb-1.5 block text-sm font-medium text-slate-700;
+  }
+  .carte {
+    @apply rounded-2xl bg-white shadow-carte ring-1 ring-marque-100/70;
+  }
+  /* Bande tricolore orange-blanc-vert (drapeau de Côte d'Ivoire) */
+  .bande-ci {
+    @apply h-1.5 w-full;
+    background: linear-gradient(90deg, #f77f00 0 33.33%, #ffffff 33.33% 66.66%, #009e60 66.66%);
+  }
+  /* Motif géométrique façon pagne / toile de Korhogo */
+  .motif-pagne {
+    background-color: #3b2a1e;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(247, 127, 0, 0.35) 0 10px, transparent 10px 20px),
+      repeating-linear-gradient(-45deg, rgba(0, 158, 96, 0.3) 0 10px, transparent 10px 20px);
+  }
+  .produit-card {
+    @apply transition duration-300 hover:-translate-y-1 hover:shadow-premium;
+  }
+  .produit-image img {
+    @apply transition duration-500;
+  }
+}
+
+/* ==========================================================================
+   Logo « K » animé en continu : anneau de motifs traditionnels + pulsation
+   ========================================================================== */
+.logo-k {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 0.9rem;
+  overflow: hidden;
+  background: linear-gradient(140deg, #f77f00 0%, #ff9d2e 45%, #009e60 100%);
+  box-shadow: 0 6px 18px -6px rgba(247, 127, 0, 0.65);
+}
+.logo-k::before {
+  content: '';
+  position: absolute;
+  inset: -40%;
+  background-image: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.6) 0deg 7deg,
+    transparent 7deg 25deg
+  );
+  animation: logo-tourne 9s linear infinite;
+  opacity: 0.6;
+}
+.logo-k::after {
+  content: '';
+  position: absolute;
+  inset: 0.25rem;
+  border-radius: 0.65rem;
+  background: #fffaf2;
+  box-shadow: inset 0 0 0 1px rgba(59, 42, 30, 0.08);
+}
+.logo-k > span {
+  position: relative;
+  z-index: 1;
+  font-family: var(--police-titre);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+  color: #3b2a1e;
+  animation: logo-pulse 3.6s ease-in-out infinite;
+}
+@keyframes logo-tourne {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes logo-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* ==========================================================================
+   Squelettes de chargement
+   ========================================================================== */
+.squelette {
+  position: relative;
+  overflow: hidden;
+  background: #efe6d8;
+}
+.squelette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.78), transparent);
+  animation: squelette-brille 1.4s infinite;
+}
+@keyframes squelette-brille {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ==========================================================================
+   Swiper : pagination et flèches aux couleurs de la marque
+   ========================================================================== */
+.swiper-pagination-bullet {
+  background: #d9c7ae;
+  opacity: 1;
+}
+.swiper-pagination-bullet-active {
+  background: #f77f00;
+  width: 22px;
+  border-radius: 99px;
+}
+.swiper-pagination {
+  position: static !important;
+  margin-top: 0.9rem;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #f77f00 !important;
+  background: rgba(255, 255, 255, 0.92);
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px -12px rgba(59, 42, 30, 0.6);
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 0.95rem !important;
+  font-weight: 700;
+}
+
+/* Bandeau défilant */
+.bandeau-defilant {
+  display: flex;
+  width: max-content;
+  animation: defile 30s linear infinite;
+}
+.bandeau-defilant:hover {
+  animation-play-state: paused;
+}
+
+/* Défilement horizontal sans barre (mobile) */
+.pas-defilement {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.pas-defilement::-webkit-scrollbar {
+  display: none;
+}
+
+/* Effet Ken Burns des slides du hero */
+.kenburns {
+  animation: kenburns 14s ease-out both;
+}
+@keyframes kenburns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-k::before,
+  .logo-k > span,
+  .bandeau-defilant,
+  .squelette::after,
+  .kenburns {
+    animation: none !important;
+  }
+}
+
+/* Badges produit */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}

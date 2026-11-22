@@ -1,0 +1,154 @@
+// ---------------------------------------------------------------------------
+// Schéma de base de données - Plateforme E-Commerce
+// SGBD : PostgreSQL (port 2020, base "ecommerce")
+// ---------------------------------------------------------------------------
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum ModePaiement {
+  ORANGE_MONEY
+  MTN_MOMO
+  MOOV_MONEY
+  WAVE
+  LIVRAISON
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CLIENT
+  ADMIN
+}
+
+enum StatutCommande {
+  EN_ATTENTE
+  EXPEDIEE
+  LIVREE
+  ANNULEE
+}
+
+/// Utilisateur de la plateforme (client ou administrateur)
+model Utilisateur {
+  id         Int      @id @default(autoincrement())
+  nom        String
+  email      String   @unique
+  motDePasse String // hash bcrypt - jamais le mot de passe en clair
+  role       Role     @default(CLIENT)
+  bloque     Boolean  @default(false)
+  creeLe     DateTime @default(now())
+
+  commandes Commande[]
+  avis      Avis[]
+
+  @@index([role])
+}
+
+/// Catégorie de produits
+model Categorie {
+  id       Int       @id @default(autoincrement())
+  nom      String    @unique
+  slug     String    @unique
+  produits Produit[]
+
+  @@index([slug])
+}
+
+/// Produit du catalogue
+model Produit {
+  id          Int      @id @default(autoincrement())
+  nom         String
+  slug        String   @unique
+  description String
+  prix        Decimal  @db.Decimal(10, 2)
+  ancienPrix  Decimal? @db.Decimal(10, 2)
+  stock       Int      @default(0)
+  image       String?
+  origine     String?
+  artisan     String?
+  matiere     String?
+  actif       Boolean  @default(true)
+  creeLe      DateTime @default(now())
+
+  categorieId Int
+  categorie   Categorie @relation(fields: [categorieId], references: [id])
+
+  lignes LigneCommande[]
+  avis   Avis[]
+
+  @@index([categorieId])
+  @@index([nom])
+}
+
+/// Commande passée par un client
+model Commande {
+  id               Int            @id @default(autoincrement())
+  reference        String         @unique
+  statut           StatutCommande @default(EN_ATTENTE)
+  total            Decimal        @db.Decimal(10, 2)
+  adresseLivraison String
+  ville            String
+  codePostal       String
+  telephone        String
+  creeLe           DateTime       @default(now())
+  modePaiement     ModePaiement   @default(LIVRAISON)
+
+  utilisateurId Int
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
+
+  lignes LigneCommande[]
+
+  @@index([utilisateurId])
+  @@index([statut])
+  @@index([ville])
+}
+
+/// Ligne d'une commande (snapshot du prix et du nom au moment de l'achat)
+model LigneCommande {
+  id           Int     @id @default(autoincrement())
+  quantite     Int
+  prixUnitaire Decimal @db.Decimal(10, 2)
+  nomProduit   String
+
+  commandeId Int
+  commande   Commande @relation(fields: [commandeId], references: [id], onDelete: Cascade)
+
+  produitId Int
+  produit   Produit @relation(fields: [produitId], references: [id])
+
+  @@index([commandeId])
+  @@index([produitId])
+}
+
+model MessageContact {
+  id      Int      @id @default(autoincrement())
+  nom     String
+  email   String
+  sujet   String
+  message String
+  creeLe  DateTime @default(now())
+  traite  Boolean  @default(false)
+
+  @@index([creeLe])
+  @@index([traite])
+}
+
+model Avis {
+  id            Int         @id @default(autoincrement())
+  note          Int
+  titre         String?
+  commentaire   String
+  achatVerifie  Boolean     @default(false)
+  creeLe        DateTime    @default(now())
+  utilisateurId Int
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id], onDelete: Cascade)
+  produitId     Int
+  produit       Produit     @relation(fields: [produitId], references: [id], onDelete: Cascade)
+
+  @@unique([utilisateurId, produitId])
+  @@index([produitId])
+}

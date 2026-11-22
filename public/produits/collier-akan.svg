@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480">
+  <rect width="640" height="480" fill="#fbf6ee"/><path d="M0 390h640v90H0z" fill="#f77f00"/>
+  <path d="M190 150c0 205 260 205 260 0" fill="none" stroke="#3b2a1e" stroke-width="8"/>
+  <g stroke="#fff" stroke-width="4"><circle cx="192" cy="180" r="18" fill="#009e60"/><circle cx="213" cy="245" r="18" fill="#f77f00"/><circle cx="255" cy="292" r="18" fill="#1684a4"/><circle cx="320" cy="310" r="18" fill="#d94848"/><circle cx="385" cy="292" r="18" fill="#1684a4"/><circle cx="427" cy="245" r="18" fill="#f77f00"/><circle cx="448" cy="180" r="18" fill="#009e60"/></g>
+  <text x="320" y="375" text-anchor="middle" font-family="sans-serif" font-size="29" fill="#3b2a1e">Collier akan</text>
+</svg>
