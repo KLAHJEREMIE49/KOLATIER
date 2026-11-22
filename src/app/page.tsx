@@ -17,8 +17,8 @@ const relationsCarte = {
   avis: { select: { note: true } },
 };
 
-export default async function AccueilPage() {
-  const [categories, nouveautes, ventes, totalProduits, promos, stocksSerres] = await Promise.all([
+function chargerDonnees() {
+  return Promise.all([
     prisma.categorie.findMany({
       where: { produits: { some: { actif: true } } },
       include: { _count: { select: { produits: { where: { actif: true } } } } },
@@ -46,13 +46,29 @@ export default async function AccueilPage() {
       include: relationsCarte,
     }),
   ]);
+}
+
+type DonneesAccueil = Awaited<ReturnType<typeof chargerDonnees>>;
+type ProduitsVendus = Awaited<ReturnType<typeof chargerProduitsVendus>>;
+
+function chargerProduitsVendus(ids: number[]) {
+  return prisma.produit.findMany({ where: { id: { in: ids }, actif: true }, include: relationsCarte });
+}
+
+const DONNEES_VIDES = [[], [], [], 0, [], []] as unknown as DonneesAccueil;
+
+export default async function AccueilPage() {
+  // Si la base est indisponible, on affiche la page sans produits plutôt qu'une erreur.
+  const [categories, nouveautes, ventes, totalProduits, promos, stocksSerres] = await chargerDonnees().catch(
+    (erreur: unknown) => {
+      console.error('[accueil] Base de données indisponible :', erreur instanceof Error ? erreur.message : erreur);
+      return DONNEES_VIDES;
+    },
+  );
 
   // Meilleures ventes réelles (agrégat des lignes de commande)
-  const produitsVendus = ventes.length
-    ? await prisma.produit.findMany({
-        where: { id: { in: ventes.map((v) => v.produitId) }, actif: true },
-        include: relationsCarte,
-      })
+  const produitsVendus: ProduitsVendus = ventes.length
+    ? await chargerProduitsVendus(ventes.map((v) => v.produitId)).catch(() => [])
     : [];
   const parId = new Map(produitsVendus.map((p) => [p.id, p]));
   const meilleuresVentes = ventes
